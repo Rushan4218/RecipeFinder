@@ -4,10 +4,11 @@ import { FaSearch } from "react-icons/fa";
 
 interface searchBarProps {
     value: string,
-    handleChange: (value: string) => void
+    // handleChange: (value: string) => void
+    setInput: (value: string) => void
 }
 
-const SearchBar: React.FC<searchBarProps> = ({ value, handleChange }) => {
+const SearchBar: React.FC<searchBarProps> = ({ value, setInput }) => {
 
     return (
         <div className="top-area">
@@ -20,7 +21,7 @@ const SearchBar: React.FC<searchBarProps> = ({ value, handleChange }) => {
                     type="input"
                     className="search-box"
                     value={value}
-                    onChange={(e) => handleChange(e.target.value)}
+                    onChange={(e) => setInput(e.target.value)}
                 />
                 <button className="search-btn"><FaSearch className="search-icon" /></button>
             </form>

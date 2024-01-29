@@ -10,13 +10,14 @@ const App: React.FC = () => {
     //     setInput(e.target.value);
     // } 
 
-    const handleChange = (value: string) => setInput(value)
-    
+    // const handleChange = (value: string) => setInput(value)
+
     return (
         <div className="main-container">
             <SearchBar
                 value={input}
-                handleChange={handleChange}
+                // handleChange={handleChange}
+                setInput={setInput}
             />
             <Recipes />
         </div>
