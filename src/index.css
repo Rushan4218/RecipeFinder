@@ -97,7 +97,7 @@ body {
     border-radius: 10px;
     margin-right: 10px;
 }
-.recipe {
+.food-item {
     background-color: #FAF1CF;
     border-radius: 10px;
     user-select: none;
@@ -114,10 +114,10 @@ body {
         grid-template-columns: repeat(4, minmax(170px, 230px));
     }
 }
-.recipe:hover {
+.food-item:hover {
     cursor: pointer;
 }
-.recipe:active {
+.food-item:active {
     transform: scale(0.8);
 }
 .image {
