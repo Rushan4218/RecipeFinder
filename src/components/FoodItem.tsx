@@ -1,42 +1,21 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import React from "react";
 
 interface recipeProps {
-    id: number,
     image: string,
-    title: string
-    displayDetails: (itemDetails: any) => void;
+    title: string,
 }
 
-const FoodItem: React.FC<recipeProps> = ({ id, image, title, displayDetails }) => {
-    const [itemDetails, setItemDetails] = useState<any>();
+const FoodItem: React.FC<recipeProps> = ({
+    image,
+    title,
+}) => {
 
-    const apiKey = "272b8ee4f7c84a7e87c867db06a0919a";
-    const fetchDetails = async () => {
-        try {
-            const response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`);
-            const details = await response.json();            
-            setItemDetails(
-                {
-                    title: details.title,
-                    imgUrl: details.image,
-                    ingredients: details.extendedIngredients,
-                    instructions: details.instructions   
-                })
-        } catch (error) {
-            console.log("Error: ", error);
-        }
-    }
-
-    const handleItemClick = () => {
-        fetchDetails();
-    }
-    useEffect(() => {
-        displayDetails(itemDetails);
-    }, [itemDetails]);
-    
     return (
-        <div className="food-item" onClick={handleItemClick}>
-            <img 
+        <div
+            className="food-item">
+            <img
                 src={image}
                 alt="image"
                 className="image"

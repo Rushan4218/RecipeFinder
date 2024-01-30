@@ -23,7 +23,9 @@ const SearchBar: React.FC<searchBarProps> = ({ value, handleChange, onSubmit }) 
                     value={value}
                     onChange={(e) => handleChange(e.target.value)}
                 />
-                <button className="search-btn"><FaSearch className="search-icon" /></button>
+                <button className="search-btn">
+                    <FaSearch className="search-icon" />
+                </button>
             </form>
         </div>
     )

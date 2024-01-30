@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import FoodItems from "./components/FoodItems";
@@ -8,9 +10,9 @@ const App: React.FC = () => {
     const [input, setInput] = useState<string>("");
     const handleChange = (value: string) => setInput(value);
 
-    const apiKey = "272b8ee4f7c84a7e87c867db06a0919a";
+    const apiKey = "7dc40d83134e45b6ad519ccae9956e72";
     const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${input}`;
-    
+
     const fetchData = async () => {
         try {
             const response = await fetch(apiUrl);
@@ -32,32 +34,48 @@ const App: React.FC = () => {
         e.preventDefault();
         fetchData();
     }
-    const [detailsEl, setDetailsEl] = useState<any>();
-    const [showDetails, setShowDetails] = useState<boolean>(false);
 
-    
-    let itemInformation;
-    const displayDetails = (itemDetails: any) => {
-        itemInformation = itemDetails;
-        setShowDetails(true);
-        setDetailsEl(<Details itemDetails={itemInformation} handleDeleteClicked={setShowDetails(false)}/>)
-    }
-    console.log(showDetails);
+
+    const [showDetails, setShowDetails] = useState(false);
+    const [itemDetails, setItemDetails] = useState<any>();
+
     return (
-        <div className="main-container">
+        <div className="main-container"
+            style={{ position: 'relative' }}>
+
+            {
+                showDetails && (
+                    <div
+                        style={{
+                            position: "absolute",
+                            top: "0",
+                            left: "0",
+                            minHeight: "100%",
+                            width: "100%",
+                            zIndex: "100"
+                        }}
+                    >
+                        <Details
+                            itemDetails={itemDetails}
+                            setShowDetails={setShowDetails}
+                        />
+                    </div>
+                )
+
+            }
             <SearchBar
                 value={input}
                 handleChange={handleChange}
                 onSubmit={onSubmit}
             />
             <div className="item-container">
-                {showDetails && detailsEl}
                 <FoodItems
+                    setShowDetails={setShowDetails}
                     foodItems={foodItems}
-                    displayDetails={displayDetails}
+                    setItemDetails={setItemDetails}
                 />
             </div>
-            
+
         </div>
     )
 }
