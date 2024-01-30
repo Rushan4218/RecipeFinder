@@ -38,6 +38,7 @@ const App: React.FC = () => {
 
     const [showDetails, setShowDetails] = useState(false);
     const [itemDetails, setItemDetails] = useState<any>();
+    const [loading, setLoading] = useState(false)
 
     return (
         <div className="main-container"
@@ -56,6 +57,7 @@ const App: React.FC = () => {
                         }}
                     >
                         <Details
+                            loading={loading}
                             itemDetails={itemDetails}
                             setShowDetails={setShowDetails}
                         />
@@ -70,6 +72,7 @@ const App: React.FC = () => {
             />
             <div className="item-container">
                 <FoodItems
+                    setLoading={setLoading}
                     setShowDetails={setShowDetails}
                     foodItems={foodItems}
                     setItemDetails={setItemDetails}
