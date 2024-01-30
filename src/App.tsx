@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
-import Recipes from "./components/Recipes";
+import FoodItems from "./components/FoodItems";
+import Details from "./components/Details";
 
 const App: React.FC = () => {
 
     const [input, setInput] = useState<string>("");
     const handleChange = (value: string) => setInput(value);
 
-    const apiKey = "c1b30b73d1084bf18f2f53adf7b5fa8d";
+    const apiKey = "272b8ee4f7c84a7e87c867db06a0919a";
     const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${input}`;
     
     const fetchData = async () => {
         try {
             const response = await fetch(apiUrl);
             const data = await response.json();
-            setRecipes(data.results);
+            setFoodItems(data.results);
         } catch (error) {
             console.error("Error: ", error);
         }
@@ -25,13 +26,23 @@ const App: React.FC = () => {
         title: string,
         image: string
     }
-    const [recipes, setRecipes] = useState<objectSubSet[]>([]);
+    const [foodItems, setFoodItems] = useState<objectSubSet[]>([]);
 
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         fetchData();
     }
+    const [detailsEl, setDetailsEl] = useState<any>();
+    const [showDetails, setShowDetails] = useState<boolean>(false);
+
     
+    let itemInformation;
+    const displayDetails = (itemDetails: any) => {
+        itemInformation = itemDetails;
+        setShowDetails(true);
+        setDetailsEl(<Details itemDetails={itemInformation} handleDeleteClicked={setShowDetails(false)}/>)
+    }
+    console.log(showDetails);
     return (
         <div className="main-container">
             <SearchBar
@@ -39,7 +50,14 @@ const App: React.FC = () => {
                 handleChange={handleChange}
                 onSubmit={onSubmit}
             />
-            <Recipes recipes={recipes}/>
+            <div className="item-container">
+                {showDetails && detailsEl}
+                <FoodItems
+                    foodItems={foodItems}
+                    displayDetails={displayDetails}
+                />
+            </div>
+            
         </div>
     )
 }

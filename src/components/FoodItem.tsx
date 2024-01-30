@@ -4,12 +4,13 @@ interface recipeProps {
     id: number,
     image: string,
     title: string
+    displayDetails: (itemDetails: any) => void;
 }
 
-const Recipe: React.FC<recipeProps> = ({ id, image, title}) => {
+const FoodItem: React.FC<recipeProps> = ({ id, image, title, displayDetails }) => {
     const [itemDetails, setItemDetails] = useState<any>();
 
-    const apiKey = "c1b30b73d1084bf18f2f53adf7b5fa8d";
+    const apiKey = "272b8ee4f7c84a7e87c867db06a0919a";
     const fetchDetails = async () => {
         try {
             const response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`);
@@ -26,13 +27,12 @@ const Recipe: React.FC<recipeProps> = ({ id, image, title}) => {
         }
     }
 
-    useEffect(() => {
-        if (!itemDetails) return;
-        console.log(itemDetails);
-    },[itemDetails]);
     const handleItemClick = () => {
         fetchDetails();
     }
+    useEffect(() => {
+        displayDetails(itemDetails);
+    }, [itemDetails]);
     
     return (
         <div className="food-item" onClick={handleItemClick}>
@@ -46,4 +46,4 @@ const Recipe: React.FC<recipeProps> = ({ id, image, title}) => {
     )
 }
 
-export default Recipe;
+export default FoodItem;
