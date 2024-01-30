@@ -15,14 +15,14 @@ const FoodItems: React.FC<recipesProps> = ({ foodItems,
 }) => {
 
 
-    const apiKey = "272b8ee4f7c84a7e87c867db06a0919a";
+    const apiKey = "7dc40d83134e45b6ad519ccae9956e72";
 
     const fetchDetails = async (id: string) => {
         try {
             const response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`);
             const details = await response.json();
-            console.log("response yesto aaira xa")
-            console.log(response)
+            // console.log("response yesto aaira xa")
+            // console.log(response)
             setItemDetails(
                 {
                     title: details.title,
@@ -38,7 +38,6 @@ const FoodItems: React.FC<recipesProps> = ({ foodItems,
 
     return (
         <div
-            style={{ border: "2px solid blue" }}
             className="food-item-grid">
             {
                 foodItems?.map((item) => {

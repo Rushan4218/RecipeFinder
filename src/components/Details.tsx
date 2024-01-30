@@ -14,8 +14,8 @@ const Details: React.FC<detailsProps> = ({
     itemDetails,
     setShowDetails }) => {
 
-    console.log("this is itemDetails")
-    console.log(itemDetails)
+    // console.log("this is itemDetails")
+    // console.log(itemDetails)
 
     if (itemDetails) {
         <div>
@@ -25,27 +25,27 @@ const Details: React.FC<detailsProps> = ({
     return (
         <div className="details">
             <img
-                // src={itemDetails.imgUrl || "url"}
+                src={itemDetails.imgUrl || "url"}
                 alt="IMAGENOTLOADED"
                 className="details-img"
             />
             <h1 className="details-title">
-                {/* {itemDetails.title} */}
+                {itemDetails.title}
             </h1>
             <h2 className="subtitle">
                 Ingredients
             </h2>
             <ul className="ingredient-list content">
-                {/* {itemDetails.ingredients.map((ingredient: any, index: number) => {
+                {itemDetails.ingredients.map((ingredient: any, index: number) => {
                     return <li key={index}>{ingredient.name}</li>
-                })} */}
+                })}
             </ul>
             <h2 className="subtitle">
                 Instructions
             </h2>
             <h3
                 className="details-instructions content"
-            // dangerouslySetInnerHTML={{ __html: itemDetails.instructions }}
+                dangerouslySetInnerHTML={{ __html: itemDetails.instructions }}
             >
 
             </h3>
